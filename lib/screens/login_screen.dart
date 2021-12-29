@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:email_login/screens/home_screen.dart';
 import 'package:email_login/screens/registration_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -15,8 +19,28 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
 
   //Editing Controller
-  final TextEditingController emailController = new TextEditingController();
-  final TextEditingController passwordController = new TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  // Firebase
+  final _auth = FirebaseAuth.instance;
+
+  // Lgin Function
+  void signIn(String email, String password) async {
+    if (_formKey.currentState!.validate()) {
+      await _auth
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((uid) => {
+                Fluttertoast.showToast(msg: "Login Successful"),
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => const HomeScreen())),
+              })
+          // Login Failed
+          .catchError((e) {
+        Fluttertoast.showToast(msg: e!.message);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +49,19 @@ class _LoginScreenState extends State<LoginScreen> {
         autofocus: false,
         controller: emailController,
         keyboardType: TextInputType.emailAddress,
-        // validator: (){},
+        // validator
+        validator: (value) {
+          if (value!.isEmpty) {
+            return ("Required");
+          }
+          // RegEx
+          // ignore: valid_regexps
+          if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+              .hasMatch(value)) {
+            return ("Invalid Email");
+          }
+          return null;
+        },
         onSaved: (value) {
           emailController.text = value!;
         },
@@ -33,20 +69,30 @@ class _LoginScreenState extends State<LoginScreen> {
         // Styling Email Field
         decoration: InputDecoration(
           // ignore: unnecessary_const
-          prefixIcon: Icon(Icons.mail),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          prefixIcon: const Icon(Icons.mail),
+          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Email",
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(30),
           ),
-        ));
+        ),
+    );
 
     //Password Field
     final passwordField = TextFormField(
         autofocus: false,
         controller: passwordController,
         obscureText: _obscureText,
-        // validator: (){},
+        // validator password
+        validator: (value) {
+          RegExp regex = RegExp(r'^.{6,}$');
+          if (value!.isEmpty) {
+            return ("Required");
+          }
+          if (!regex.hasMatch(value)) {
+            return ("Enter Strong Password");
+          }
+        },
         onSaved: (value) {
           passwordController.text = value!;
         },
@@ -55,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
         // Styling Password Field
         decoration: InputDecoration(
           // ignore: unnecessary_const
-          prefixIcon: Icon(Icons.lock),
+          prefixIcon: const Icon(Icons.lock),
           suffixIcon: GestureDetector(
             onTap: () {
               setState(() {
@@ -66,39 +112,45 @@ class _LoginScreenState extends State<LoginScreen> {
               _obscureText ? Icons.visibility : Icons.visibility_off,
             ),
           ),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Enter Password",
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(30),
           ),
         ));
 
     // Login Button
     final loginButton = Material(
-      elevation: 5,
-      borderRadius: BorderRadius.circular(20),
-      color: Colors.blue,
       child: MaterialButton(
-        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-        minWidth: MediaQuery.of(context).size.width,
+        padding: const EdgeInsets.all(0.0),
         onPressed: () {
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => HomeScreen()));
+          signIn(emailController.text, passwordController.text);
         },
-        child: Text(
-          "Login",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 20,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
+        child: Ink(
+          decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                  colors: [Color(0xFF1976d2), Color(0xFFbbdefb)],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight),
+              borderRadius: BorderRadius.circular(30)),
+          child: Container(
+            constraints: const BoxConstraints(maxWidth: 345, maxHeight: 50),
+            alignment: Alignment.center,
+            child: const Text(
+              "LOGIN",
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.white,
+                fontFamily: 'LatoBold',
+              ),
+            ),
           ),
         ),
       ),
     );
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xfff7f8fc),
       body: Center(
         child: SingleChildScrollView(
           child: Container(
@@ -106,6 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Padding(
               padding: const EdgeInsets.all(36.0),
               child: Form(
+                autovalidateMode: AutovalidateMode.always,
                 key: _formKey,
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -113,38 +166,39 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: <Widget>[
                       SizedBox(
                         // height: 150,
-                        width: 150,
+                        width: 180,
                         child: Image.asset(
-                          'assets/logos/logo.jpg',
+                          'assets/logos/logo.png',
                           fit: BoxFit.contain,
                         ),
                       ),
-                      SizedBox(height: 45),
+                      const SizedBox(height: 45),
                       emailField,
-                      SizedBox(height: 25),
+                      const SizedBox(height: 25),
                       passwordField,
-                      SizedBox(height: 35),
+                      const SizedBox(height: 35),
                       loginButton,
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       // Don't have an acc?
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text("Don't have an account? "),
+                          const Text("Don't have an account? "),
                           GestureDetector(
                               onTap: () {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            RegistrationScreen()));
+                                            const RegistrationScreen()));
                               },
-                              child: Text(
+                              child: const Text(
                                 "Sign Up Here",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w600,
                                     fontSize: 15,
-                                    color: Colors.blueAccent),
+                                    fontFamily: 'LatoBold',
+                                    color: Colors.blue),
                               ))
                         ],
                       )

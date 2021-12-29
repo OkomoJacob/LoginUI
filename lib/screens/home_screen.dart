@@ -48,7 +48,7 @@ final logoutButton = Material(
             children: <Widget>[
               SizedBox(
                 height: 100,
-                child: Image.asset("assets/logos/logo.jpg", fit: BoxFit.contain),
+                child: Image.asset("assets/logos/logo.png", fit: BoxFit.contain),
               ),
               SizedBox(height: 60,),
               Text("Welcome Back",

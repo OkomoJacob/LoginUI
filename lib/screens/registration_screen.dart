@@ -1,3 +1,4 @@
+import 'package:email_login/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -14,32 +15,32 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final _formKey = GlobalKey<FormState>();
 
   // Editing Controller
-  final nameEditingController = new TextEditingController();
-  final userNameEditingController = new TextEditingController();
-  final emailEditingController = new TextEditingController();
-  final passwordEditingController = new TextEditingController();
-  final confirmPasswordEditingController = new TextEditingController();
+  final nameEditingController = TextEditingController();
+  final userNameEditingController = TextEditingController();
+  final emailEditingController = TextEditingController();
+  final passwordEditingController = TextEditingController();
+  final confirmPasswordEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     //Name Field
     final nameField = TextFormField(
-        autofocus: false,
-        controller: nameEditingController,
-        keyboardType: TextInputType.name,
-        onSaved: (value) {
-          nameEditingController.text = value!;
-        },
-        textInputAction: TextInputAction.next,
-        // Styling Name Field
-        decoration: InputDecoration(
-          // ignore: unnecessary_const
-          prefixIcon: Icon(Icons.person),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "Enter Names",
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ));
+      autofocus: false,
+      controller: nameEditingController,
+      keyboardType: TextInputType.name,
+      onSaved: (value) {
+        nameEditingController.text = value!;
+      },
+      textInputAction: TextInputAction.next,
+      // Styling Name Field
+      decoration: InputDecoration(
+        prefixIcon: const Icon(Icons.person),
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+        hintText: "Enter Names",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+        ),
+      ),
+    );
 
     //UserName Field
     final userNameField = TextFormField(
@@ -53,11 +54,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         // Styling Name Field
         decoration: InputDecoration(
           // ignore: unnecessary_const
-          prefixIcon: Icon(Icons.person),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          prefixIcon: const Icon(Icons.person),
+          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Create Username",
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(30),
           ),
         ));
 
@@ -73,11 +74,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         // Styling Email Field
         decoration: InputDecoration(
           // ignore: unnecessary_const
-          prefixIcon: Icon(Icons.mail),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          prefixIcon: const Icon(Icons.mail),
+          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Enter Email Adress",
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(30),
           ),
         ));
 
@@ -93,19 +94,21 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         // Styling Create Password Field
         decoration: InputDecoration(
           // ignore: unnecessary_const
-          prefixIcon: Icon(Icons.lock),
+          prefixIcon: const Icon(Icons.lock),
           suffixIcon: GestureDetector(
             onTap: () {
               setState(() {
                 _obscureText = !_obscureText;
               });
             },
-            child: Icon(_obscureText ?Icons.visibility :Icons.visibility_off,),
+            child: Icon(
+              _obscureText ? Icons.visibility : Icons.visibility_off,
+            ),
           ),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Create Security Password",
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(30),
           ),
         ));
 
@@ -121,39 +124,51 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         // Confirm Password Field
         decoration: InputDecoration(
           // ignore: unnecessary_const
-          prefixIcon: Icon(Icons.lock),
+          prefixIcon: const Icon(Icons.lock),
           suffixIcon: GestureDetector(
             onTap: () {
               setState(() {
                 _obscureText = !_obscureText;
               });
             },
-            child: Icon(_obscureText ?Icons.visibility :Icons.visibility_off,),
+            child: Icon(
+              _obscureText ? Icons.visibility : Icons.visibility_off,
+            ),
           ),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Confirm Password",
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(30),
           ),
         ));
 
     //Sign Up button
     final signUpButton = Material(
-      elevation: 5,
-      borderRadius: BorderRadius.circular(20),
-      color: Colors.deepPurple[700],
       child: MaterialButton(
-        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        padding: const EdgeInsets.all(0.0),
         minWidth: MediaQuery.of(context).size.width,
-        onPressed: () {},
-        child: Text(
-          "Sing Up",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 20,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+        onPressed: () {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => const LoginScreen()));
+          },
+        child: Ink(
+          decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                  colors: [Color(0xFF1976d2), Color(0xFFbbdefb)],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight),
+              borderRadius: BorderRadius.circular(30)),
+          child: Container(
+              constraints: const BoxConstraints(maxWidth: 345, maxHeight: 50),
+              alignment: Alignment.center,
+              child: const Text(
+                "Sign Up",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.white,
+                  fontFamily: 'LatoBold',
+                ),
+              )),
         ),
       ),
     );
@@ -184,25 +199,25 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   children: <Widget>[
                     SizedBox(
                       // height: 150,
-                      width: 150,
+                      width: 180,
                       child: Image.asset(
-                        'assets/logos/logo.jpg',
+                        'assets/logos/logo.png',
                         fit: BoxFit.contain,
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     nameField,
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     userNameField,
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     emailField,
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     passwordField,
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     confirmPasswordField,
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     signUpButton,
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                   ],
                 ),
               ),
