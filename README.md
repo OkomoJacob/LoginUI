@@ -40,6 +40,40 @@ $ flutter test
 ```shell
 $ flutter run
 ```
+
+## Adding to Firebase (Backend as a service)
+
+Firebase is a Backend as a Service platform owned and operated by Google Iinc. It saves the backend developement and configurations.
+
+### 1. Register app
+- Head to [Google Firebase Console](https://console.firebase.google.com/u/0/) and create a new project.
+- While in project overview, click the android icon to add firebase to your project.
+- In your local project, navigate to `uber_driver/android/app/main/AndroidManifest.xml` file and under the `<manifest` tag, copy the contents in the marks and paste as your android package name
+
+```dart
+package="com.example.app_name">
+```
+
+### 2. Download the config files
+
+### 3. Add Firebase SDK
+
+### 4. Add initialization code
+
+### 5. Get back to firebase console
+
+Set these rule to your Cloud Firestore to enable read and write if requested is not null.
+
+```dart
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
+```
 Feel free to tweak opr change the source code as you wish!
 
 <img src = "https://github.com/OkomoJacob/LoginUI/blob/main/snips/loginScreen.PNG"><img src = "https://github.com/OkomoJacob/LoginUI/blob/main/snips/registrationScreen.PNG"><img src = "https://github.com/OkomoJacob/LoginUI/blob/main/snips/logOut.PNG">
@@ -52,3 +86,4 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
