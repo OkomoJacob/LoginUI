@@ -6,8 +6,7 @@ A new Flutter project.
 
 This project is a starting point for a Flutter application.
 
-<img src = "https://github.com/OkomoJacob/LoginUI/blob/main/snips/loginScreen.PNG"> 
-<img src = "https://github.com/OkomoJacob/LoginUI/blob/main/snips/registrationScreen.PNG"><br>
+<img src = "https://github.com/OkomoJacob/LoginUI/blob/main/snips/loginScreen.PNG"> <img src = "https://github.com/OkomoJacob/LoginUI/blob/main/snips/registrationScreen.PNG"><br>
 
 A few resources to get you started if this is your first Flutter project:
 
