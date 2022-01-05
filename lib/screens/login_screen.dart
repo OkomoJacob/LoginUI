@@ -68,14 +68,16 @@ class _LoginScreenState extends State<LoginScreen> {
       child: MaterialButton(
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
-        onPressed: (){},
+        onPressed: () {},
         child: Text(
           "Login",
           textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold,
+            fontSize: 20,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
           ),
-          ),
+        ),
       ),
     );
 
@@ -85,10 +87,31 @@ class _LoginScreenState extends State<LoginScreen> {
         child: SingleChildScrollView(
           child: Container(
             color: Colors.white,
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: <Widget>[emailField, passwordField, loginButton],
+            child: Padding(
+              padding: const EdgeInsets.all(36.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center, 
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      // height: 150,
+                      width: 150,
+                      child: Image.asset(
+                        'assets/logos/logo.jpg',
+                        fit: BoxFit.contain,
+                        ),
+                    ),
+                    SizedBox(height: 45),
+                    emailField, 
+                    SizedBox(height: 45),
+                    passwordField, 
+                    SizedBox(height: 45),
+                    loginButton,
+                    SizedBox(height: 45),
+                  ]
+                ),
               ),
             ),
           ),
