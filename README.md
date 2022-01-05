@@ -1,11 +1,11 @@
-# email_login
+# Mobile Login User Interface
 
 A new Flutter project.
 
-## Getting Started
+## Getting Started with Sign in, Sign Up
 
 This project is a starting point for a Flutter application.
-
+<img src = "https://github.com/OkomoJacob/LoginUI/blob/main/snips/login.PNG">
 A few resources to get you started if this is your first Flutter project:
 
 - [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
