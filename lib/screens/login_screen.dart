@@ -109,7 +109,22 @@ class _LoginScreenState extends State<LoginScreen> {
                     passwordField, 
                     SizedBox(height: 35),
                     loginButton,
-                    SizedBox(height: 45),
+                    SizedBox(height: 15),
+                    // Don't have an acc?
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text("Don't have an account? "),
+                        GestureDetector(
+                          onTap: () {},
+                          child: Text(
+                            "Sign Up Here",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600, fontSize: 15, color: Colors.blueAccent),
+                          )
+                        )
+                      ],
+                    )
                   ]
                 ),
               ),
