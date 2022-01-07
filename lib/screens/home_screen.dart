@@ -11,6 +11,29 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+
+final logoutButton = Material(
+  elevation: 5,
+  borderRadius: BorderRadius.circular(20),
+  color: Colors.red[400],
+  child: MaterialButton(
+    padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+    minWidth: MediaQuery.of(context).size.width,
+    onPressed: () {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => LoginScreen()));
+    },
+    child: Text(
+      "Logout",
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        fontSize: 20,
+        color: Colors.white,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+  ),
+);
     return Scaffold(
       appBar: AppBar(
         title: Text("Welcome User"),
@@ -24,24 +47,28 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               SizedBox(
-                height: 180,
+                height: 100,
                 child: Image.asset("assets/logos/logo.jpg", fit: BoxFit.contain),
               ),
+              SizedBox(height: 60,),
               Text("Welcome Back",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
             SizedBox(
-              height: 20),
+              height: 10),
               Text("someuser",
-              style: TextStyle(color: Colors.black54, fontWeight: FontWeight.w500)
+              style: TextStyle(fontSize: 15, color: Colors.black54, fontWeight: FontWeight.w500)
             ),
               Text("someuser@github.dev",
-              style: TextStyle(color: Colors.black54, fontWeight: FontWeight.w500)
+              style: TextStyle(fontSize: 15, color: Colors.black54, fontWeight: FontWeight.w500)
             ),
             SizedBox(height: 15,),
-            ActionChip(label: Text("Logout"), onPressed: () {
-                Navigator.push(context,MaterialPageRoute(builder: (context) => LoginScreen()));
-              },),
+            logoutButton,
+            SizedBox(height: 35),
+            // ActionChip(label: Text("Logout"), onPressed: () {
+            //     Navigator.push(context,MaterialPageRoute(builder: (context) => LoginScreen()));
+            //   },),
+              // Login Button
             ],
           ),
         ),
