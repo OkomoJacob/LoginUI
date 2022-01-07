@@ -5,7 +5,8 @@ A new Flutter project.
 ## Getting Started with Sign in, Sign Up
 
 This project is a starting point for a Flutter application.
-<img src = "https://github.com/OkomoJacob/LoginUI/blob/main/snips/login.PNG"> <br>
+
+<img src = "https://github.com/OkomoJacob/LoginUI/blob/main/snips/loginScreen.PNG"> <img src = "https://github.com/OkomoJacob/LoginUI/blob/main/snips/registrationScreen.PNG"><br>
 
 A few resources to get you started if this is your first Flutter project:
 
