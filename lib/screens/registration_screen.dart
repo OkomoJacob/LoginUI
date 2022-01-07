@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
@@ -9,66 +10,67 @@ class RegistrationScreen extends StatefulWidget {
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
   // Form Key
+  bool _obscureText = true;
   final _formKey = GlobalKey<FormState>();
 
   // Editing Controller
-  final firstNameEditingController = new TextEditingController();
-  final secondNameEditingController = new TextEditingController();
+  final nameEditingController = new TextEditingController();
+  final userNameEditingController = new TextEditingController();
   final emailEditingController = new TextEditingController();
   final passwordEditingController = new TextEditingController();
   final confirmPasswordEditingController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
-    //First Name Field
-    final firstNameField = TextFormField(
+    //Name Field
+    final nameField = TextFormField(
         autofocus: false,
-        controller: firstNameEditingController,
+        controller: nameEditingController,
         keyboardType: TextInputType.name,
         onSaved: (value) {
-          firstNameEditingController.text = value!;
+          nameEditingController.text = value!;
         },
         textInputAction: TextInputAction.next,
-        // Styling First Name Field
+        // Styling Name Field
         decoration: InputDecoration(
           // ignore: unnecessary_const
           prefixIcon: Icon(Icons.person),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "Enter First Name",
+          hintText: "Enter Names",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
           ),
         ));
 
-    //Second Name Field
-    final secondNameField = TextFormField(
+    //UserName Field
+    final userNameField = TextFormField(
         autofocus: false,
-        controller: secondNameEditingController,
+        controller: userNameEditingController,
         keyboardType: TextInputType.name,
         onSaved: (value) {
-          secondNameEditingController.text = value!;
+          userNameEditingController.text = value!;
         },
         textInputAction: TextInputAction.next,
-        // Styling First Name Field
+        // Styling Name Field
         decoration: InputDecoration(
           // ignore: unnecessary_const
           prefixIcon: Icon(Icons.person),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "Enter Second Name",
+          hintText: "Create Username",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
           ),
         ));
 
-    //First Valid Email Adress Field
+    //Valid Email Adress Field
     final emailField = TextFormField(
         autofocus: false,
         controller: emailEditingController,
         keyboardType: TextInputType.emailAddress,
         onSaved: (value) {
-          firstNameEditingController.text = value!;
+          nameEditingController.text = value!;
         },
         textInputAction: TextInputAction.next,
-        // Styling First Name Field
+        // Styling Email Field
         decoration: InputDecoration(
           // ignore: unnecessary_const
           prefixIcon: Icon(Icons.mail),
@@ -83,15 +85,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     final passwordField = TextFormField(
         autofocus: false,
         controller: passwordEditingController,
-        obscureText: true,
+        obscureText: _obscureText,
         onSaved: (value) {
-          firstNameEditingController.text = value!;
+          nameEditingController.text = value!;
         },
         textInputAction: TextInputAction.next,
         // Styling Create Password Field
         decoration: InputDecoration(
           // ignore: unnecessary_const
           prefixIcon: Icon(Icons.lock),
+          suffixIcon: GestureDetector(
+            onTap: () {
+              setState(() {
+                _obscureText = !_obscureText;
+              });
+            },
+            child: Icon(_obscureText ?Icons.visibility :Icons.visibility_off,),
+          ),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Create Security Password",
           border: OutlineInputBorder(
@@ -103,15 +113,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     final confirmPasswordField = TextFormField(
         autofocus: false,
         controller: confirmPasswordEditingController,
-        obscureText: true,
+        obscureText: _obscureText,
         onSaved: (value) {
-          firstNameEditingController.text = value!;
+          nameEditingController.text = value!;
         },
         textInputAction: TextInputAction.done,
         // Confirm Password Field
         decoration: InputDecoration(
           // ignore: unnecessary_const
           prefixIcon: Icon(Icons.lock),
+          suffixIcon: GestureDetector(
+            onTap: () {
+              setState(() {
+                _obscureText = !_obscureText;
+              });
+            },
+            child: Icon(_obscureText ?Icons.visibility :Icons.visibility_off,),
+          ),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Confirm Password",
           border: OutlineInputBorder(
@@ -119,8 +137,39 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           ),
         ));
 
+    //Sign Up button
+    final signUpButton = Material(
+      elevation: 5,
+      borderRadius: BorderRadius.circular(20),
+      color: Colors.deepPurple[700],
+      child: MaterialButton(
+        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        minWidth: MediaQuery.of(context).size.width,
+        onPressed: () {},
+        child: Text(
+          "Sing Up",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 20,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.deepPurple[700]),
+            onPressed: () {
+              //Pass to root
+              Navigator.of(context).pop();
+            },
+          )),
       body: Center(
         child: SingleChildScrollView(
           child: Container(
@@ -142,15 +191,18 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       ),
                     ),
                     SizedBox(height: 20),
-                    firstNameField,
+                    nameField,
                     SizedBox(height: 20),
-                    secondNameField,
+                    userNameField,
                     SizedBox(height: 20),
                     emailField,
                     SizedBox(height: 20),
                     passwordField,
                     SizedBox(height: 20),
-                    confirmPasswordField
+                    confirmPasswordField,
+                    SizedBox(height: 20),
+                    signUpButton,
+                    SizedBox(height: 15),
                   ],
                 ),
               ),
