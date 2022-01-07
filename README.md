@@ -5,22 +5,8 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/OkomoJacob/LoginUI)
 ![GitHub last commit](https://img.shields.io/github/last-commit/OkomoJacob/LoginUI?style=plastic&color=brightgreen) 
 ![Forks](https://img.shields.io/github/forks/OkomoJacob/LoginUI?style=social) 
-![GitHub contributors](https://img.shields.io/github/contributors/OkomoJacob/LoginUI)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/w/OkomoJacob/LoginU.svg?style=flat)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/w/OkomoJacob/LoginUI.svg?style=flat)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://reactjs.org/docs/how-to-contribute.html#your-first-pull-request)
-
-### List of Contents:
-- [Getting Started with Sign in, Sign Up](#the-ultimate-web-gis-developement)
-    - [List of Contents:](#list-of-contents)
-  - [Repository Main Objectives/Goals](#repository-main-objectivesgoals)
-  - [The WebGIS Starting Point](#the-webgis-starting-point)
-    - [What is web mapping?](#what-is-web-mapping)
-      - [Functions of Web Maps](#functions-of-web-maps)
-  - [Final Notes](#final-notes)
-  - [Errata](#errata)
-  - [More Related Articles/Resources](#more-related-articlesresources)
-    - [Contributing](#contributing)
-    - [License](#license)
 
 #### Be my friend on Twitter
 [![image](https://img.shields.io/twitter/follow/okomojacob?style=social)](https://twitter.com/okomojacob)
