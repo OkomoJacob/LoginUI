@@ -8,7 +8,7 @@
 ![Forks](https://img.shields.io/github/forks/OkomoJacob/LoginUI?style=social) 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://reactjs.org/docs/how-to-contribute.html#your-first-pull-request)
 
-#### Be my friend on Twitter
+#### Be my friend on twitter
 [![image](https://img.shields.io/twitter/follow/okomojacob?style=social)](https://twitter.com/okomojacob)
 
 A new Flutter project for building Login/Sign up/Logout Screens.
@@ -30,7 +30,7 @@ $ cd LoginUI/
 $ flutter doctor
 ```
 
-4. If you found no issues, then you're safe and Ok to test this application locally.Run command 5 below and go ahead. If not, kindly check the [getting started with Flutter in Linux](https://docs.flutter.dev/get-started/install/linux) or [getting started with Flutter in windows](https://docs.flutter.dev/get-started/install/windows) or [getting started with Flutter in Mac](https://docs.flutter.dev/get-started/install/macos) or [getting started with Flutter in Chrome OS](https://docs.flutter.dev/get-started/install/chromeos). This is Operatring Sytem dependent.
+4. If you found no issues, then you're safe and Ok to test this application locally.Run command 5 below and go ahead. If not, kindly check the [getting started with flutter in Linux](https://docs.flutter.dev/get-started/install/linux) or [getting started with flutter in windows](https://docs.flutter.dev/get-started/install/windows) or [getting started with Flutter in Mac](https://docs.flutter.dev/get-started/install/macos) or [getting started with flutter in Chrome OS](https://docs.flutter.dev/get-started/install/chromeos). This is Operatring System dependent.
 
 5.Test this Application in your machinie. I've tested it and it's OK.
 ```shell
